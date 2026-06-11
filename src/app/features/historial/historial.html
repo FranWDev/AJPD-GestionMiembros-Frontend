@@ -33,40 +33,7 @@
           <p>Este miembro no tiene registros en su historial de cargos.</p>
         </div>
       } @else {
-        <!-- Controles de Ordenación de Timeline (Desktop y Móvil) -->
-        <div class="timeline-sort-bar">
-          <!-- Desktop: Botones / Links -->
-          <div class="timeline-sort-desktop">
-            <span class="sort-label">Ordenar por:</span>
-            <button class="sort-btn-link" [class.active]="sortTimeline().campo === 'fechaInicio'" (click)="ordenarTimeline('fechaInicio')">
-              Fecha de Inicio
-              @if (sortTimeline().campo === 'fechaInicio') {
-                <span>{{ sortTimeline().direccion === 'asc' ? '↑' : '↓' }}</span>
-              } @else {
-                <span class="muted">↕</span>
-              }
-            </button>
-            <button class="sort-btn-link" [class.active]="sortTimeline().campo === 'fechaFin'" (click)="ordenarTimeline('fechaFin')">
-              Fecha de Fin
-              @if (sortTimeline().campo === 'fechaFin') {
-                <span>{{ sortTimeline().direccion === 'asc' ? '↑' : '↓' }}</span>
-              } @else {
-                <span class="muted">↕</span>
-              }
-            </button>
-          </div>
 
-          <!-- Móvil: Selector drop-down -->
-          <div class="timeline-sort-mobile filter-field filter-field--ordenar" style="display: none;">
-            <label for="timeline-sort-select" class="filter-label">Ordenar por</label>
-            <select id="timeline-sort-select" class="filter-input filter-select" (change)="ordenarTimelineMobile($any($event.target).value)">
-              <option value="fechaInicio,desc" [selected]="sortTimeline().campo === 'fechaInicio' && sortTimeline().direccion === 'desc'">Fecha Inicio (Reciente a antiguo)</option>
-              <option value="fechaInicio,asc" [selected]="sortTimeline().campo === 'fechaInicio' && sortTimeline().direccion === 'asc'">Fecha Inicio (Antiguo a reciente)</option>
-              <option value="fechaFin,desc" [selected]="sortTimeline().campo === 'fechaFin' && sortTimeline().direccion === 'desc'">Fecha Fin (Reciente a antiguo)</option>
-              <option value="fechaFin,asc" [selected]="sortTimeline().campo === 'fechaFin' && sortTimeline().direccion === 'asc'">Fecha Fin (Antiguo a reciente)</option>
-            </select>
-          </div>
-        </div>
 
         <!-- Timeline Vertical -->
         <div class="timeline-container">
@@ -153,17 +120,32 @@
           />
         </div>
 
-        @if (tieneFiltrosActivos()) {
-          <button class="btn btn-ghost btn-sm btn-clear" type="button" (click)="limpiarFiltros()" id="historial-limpiar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        <div class="filters-header-actions">
+          <!-- Botón de Toggle de Filtros Avanzados -->
+          <button class="btn btn-ghost btn-sm btn-toggle-filters" [class.open]="mostrarFiltrosAvanzados()" type="button" (click)="mostrarFiltrosAvanzados.set(!mostrarFiltrosAvanzados())" id="historial-toggle-filtros">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+              <path d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
             </svg>
-            Limpiar filtros
+            <span>Filtros avanzados</span>
+            <span class="btn-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </span>
           </button>
-        }
+
+          @if (tieneFiltrosActivos()) {
+            <button class="btn btn-ghost btn-sm btn-clear" type="button" (click)="limpiarFiltros()" id="historial-limpiar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+              Limpiar filtros
+            </button>
+          }
+        </div>
       </div>
 
-      <div class="filters-grid">
+      <div class="filters-grid" [class.open]="mostrarFiltrosAvanzados()">
         <!-- Cargo -->
         <div class="filter-field">
           <label for="historial-cargo" class="filter-label">Cargo</label>

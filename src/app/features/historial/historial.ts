@@ -37,23 +37,13 @@ export class HistorialComponent implements OnInit, OnDestroy {
   // ID de miembro (si filtramos por uno específico)
   readonly miembroId = signal<number | null>(null);
   readonly miembro = signal<MiembroResponse | null>(null);
-  readonly sortTimeline = signal<{ campo: 'fechaInicio' | 'fechaFin', direccion: 'asc' | 'desc' }>({ campo: 'fechaInicio', direccion: 'desc' });
 
   readonly sortedHistorial = computed(() => {
     const m = this.miembro();
     if (!m || !m.historialCargos) return [];
     const h = [...m.historialCargos];
-    const { campo, direccion } = this.sortTimeline();
-    
-    h.sort((a, b) => {
-      let valA = campo === 'fechaInicio' ? a.fechaInicio : (a.fechaFin || '9999-12-31');
-      let valB = campo === 'fechaInicio' ? b.fechaInicio : (b.fechaFin || '9999-12-31');
-      
-      // If we are sorting by fechaFin desc, we probably want Active ones at the top or bottom
-      // Let's do simple alphabetical string compare (ISO dates are safe for localeCompare)
-      const res = valA.localeCompare(valB);
-      return direccion === 'asc' ? res : -res;
-    });
+    // Ordenar por fecha de inicio descendente por defecto (más recientes al principio)
+    h.sort((a, b) => b.fechaInicio.localeCompare(a.fechaInicio));
     return h;
   });
 
@@ -66,6 +56,7 @@ export class HistorialComponent implements OnInit, OnDestroy {
   readonly filtros = signal<CargoHistorialFiltros>({});
   readonly pagina = signal(0);
   readonly tamano = signal(10);
+  readonly mostrarFiltrosAvanzados = signal(false);
 
   // UI Helpers
   readonly tieneFiltrosActivos = computed(() => {
@@ -189,28 +180,7 @@ export class HistorialComponent implements OnInit, OnDestroy {
     this.cargarHistorialGlobal();
   }
 
-  // ---- Ordenación Timeline (Vista Individual) ----
-  ordenarTimeline(campo: 'fechaInicio' | 'fechaFin'): void {
-    this.sortTimeline.update(s =>
-      s.campo === campo
-        ? { campo, direccion: s.direccion === 'asc' ? 'desc' : 'asc' }
-        : { campo, direccion: 'asc' }
-    );
-  }
 
-  ordenarTimelineMobile(valor: string): void {
-    const parts = valor.split(',');
-    if (parts.length === 2) {
-      const campo = parts[0] as 'fechaInicio' | 'fechaFin';
-      const direccion = parts[1] as 'asc' | 'desc';
-      this.sortTimeline.set({ campo, direccion });
-    }
-  }
-
-  iconoSortTimeline(campo: 'fechaInicio' | 'fechaFin'): 'asc' | 'desc' | '' {
-    const s = this.sortTimeline();
-    return s.campo === campo ? s.direccion : '';
-  }
 
   // ---- Paginación (Vista Global) ----
   irAPagina(p: number | '...'): void {
