@@ -23,7 +23,7 @@ export class TopBarComponent {
     this.modalConfirm.open({
       titulo: 'Cerrar sesión',
       mensaje: '¿Estás seguro de que deseas cerrar tu sesión en la aplicación?',
-      tipo: 'warning',
+      tipo: 'danger',
       labelConfirmar: 'Cerrar sesión',
       onConfirmar: () => {
         this.authService.logout();

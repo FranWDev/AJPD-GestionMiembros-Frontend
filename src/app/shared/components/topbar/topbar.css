@@ -124,9 +124,15 @@
 }
 
 .topbar-logout-btn:hover {
-  background-color: #fce8e6;
-  border-color: var(--color-error);
-  color: var(--color-error);
+  background-color: #fff8f0;
+  border-color: #fa9336;
+  color: #e37400;
+}
+
+[data-theme='dark'] .topbar-logout-btn:hover {
+  background-color: rgba(250, 147, 54, 0.15);
+  border-color: #fbb060;
+  color: #fbb060;
 }
 
 .topbar-logout-btn svg {

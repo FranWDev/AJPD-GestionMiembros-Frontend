@@ -16,9 +16,9 @@
   height: 14px;
   background: linear-gradient(
     90deg,
-    var(--color-border, #e5e7eb) 25%,
-    #f5f5f5 50%,
-    var(--color-border, #e5e7eb) 75%
+    var(--color-skeleton-bg) 25%,
+    var(--color-skeleton-glow) 50%,
+    var(--color-skeleton-bg) 75%
   );
   background-size: 800px 100%;
   animation: shimmer 1.5s infinite linear;
@@ -176,9 +176,9 @@
   background-size: 800px 100%;
   background-image: linear-gradient(
     90deg,
-    var(--color-border, #e5e7eb) 25%,
-    #f5f5f5 50%,
-    var(--color-border, #e5e7eb) 75%
+    var(--color-skeleton-bg) 25%,
+    var(--color-skeleton-glow) 50%,
+    var(--color-skeleton-bg) 75%
   );
 }
 
