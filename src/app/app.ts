@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PopupComponent } from './shared/components/popup/popup';
 import { ModalConfirmComponent } from './shared/components/modal-confirm/modal-confirm';
@@ -7,6 +7,7 @@ import { ModalDetailComponent } from './shared/components/modal-detail/modal-det
 import { ModalDocumentosComponent } from './shared/components/modal-documentos/modal-documentos';
 import { ModalHistorialComponent } from './shared/components/modal-historial/modal-historial';
 import { ModalMaestroComponent } from './shared/components/modal-maestro/modal-maestro';
+import { PwaService } from './core/services/pwa.service';
 
 @Component({
   selector: 'app-root',
@@ -25,4 +26,5 @@ import { ModalMaestroComponent } from './shared/components/modal-maestro/modal-m
 })
 export class App {
   protected readonly title = signal('ajpd-front');
+  private readonly pwaService = inject(PwaService);
 }

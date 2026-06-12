@@ -1,9 +1,13 @@
 {
-  "name": "ajpd-front",
-  "short_name": "ajpd-front",
+  "name": "AJPD - Gestión de Asociación",
+  "short_name": "AJPD Gestión",
+  "description": "Aplicación de gestión de la Asociación Juvenil Proyecto Dubini",
+  "theme_color": "#10234e",
+  "background_color": "#e5e0e2",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
