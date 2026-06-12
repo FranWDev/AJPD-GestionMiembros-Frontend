@@ -1,8 +1,8 @@
 @if (svc.isOpen()) {
-  <div class="modal-backdrop" (click)="svc.cerrar()" aria-hidden="true"></div>
+  <div class="modal-backdrop" [class.modal-backdrop--closing]="svc.isClosing()" (click)="svc.cerrar()" aria-hidden="true"></div>
 
   <div class="modal-container" role="dialog" aria-modal="true">
-    <div class="modal-box">
+    <div class="modal-box" [class.modal-box--closing]="svc.isClosing()">
 
       <div class="modal-header">
         <h2 class="modal-title">
@@ -10,7 +10,6 @@
         </h2>
       </div>
 
-      <!-- Formulario -->
       <form class="modal-form" (ngSubmit)="guardar()">
         <div class="form-grid">
           <div class="form-field form-field--full">
@@ -28,12 +27,10 @@
           </div>
         </div>
 
-        <!-- Error -->
         @if (errorGuardar()) {
           <p class="form-error">{{ errorGuardar() }}</p>
         }
 
-        <!-- Acciones -->
         <div class="modal-actions">
           <button class="btn btn-ghost" type="button" (click)="svc.cerrar()">Cancelar</button>
           <button

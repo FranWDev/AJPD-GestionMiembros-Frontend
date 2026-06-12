@@ -1,4 +1,4 @@
-/* === Icono === */
+
 .modal-icon {
   width: 56px;
   height: 56px;
@@ -20,16 +20,16 @@
 }
 
 .modal-box--warning .modal-icon {
-  background-color: var(--color-error-bg); /* Warning/baja shares error-bg for red icon tint style */
+  background-color: var(--color-error-bg); 
   color: var(--color-error-text);
 }
 
 .modal-box--info .modal-icon {
-  background-color: var(--color-success-bg); /* Info/revertir baja/alta uses success variables */
+  background-color: var(--color-success-bg); 
   color: var(--color-success-text);
 }
 
-/* === Texto === */
+
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -42,11 +42,54 @@
   line-height: 1.5;
 }
 
-/* Override padding de modal-box para modal-confirm */
+
 .modal-box {
-  padding: 32px;
-  max-width: 440px;
+  padding: 24px;
+  max-width: 400px;
   align-items: center;
   gap: 16px;
   text-align: center;
+}
+
+.modal-box .modal-actions {
+  border-top: none;
+  padding: 0;
+  margin-top: 8px;
+  width: 100%;
+  justify-content: center;
+  gap: 12px;
+}
+
+
+@media (max-width: 600px) {
+  .modal-container {
+    align-items: center !important;
+    padding: 16px !important;
+  }
+
+  .modal-box {
+    padding: 20px;
+    border-radius: var(--radius-gold-md) !important;
+    width: 100%;
+    max-width: 320px;
+    max-height: auto !important;
+    animation: modalIn 0.2s cubic-bezier(0.34, 1.2, 0.64, 1) forwards !important;
+  }
+
+  .modal-box .modal-actions {
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+
+  .modal-box .modal-actions .btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    height: 38px;
+  }
+
+  .modal-box--closing {
+    animation: modalOut 0.2s cubic-bezier(0.34, 1.2, 0.64, 1) forwards !important;
+  }
 }

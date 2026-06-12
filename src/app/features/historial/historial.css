@@ -8,7 +8,7 @@
   gap: 20px;
 }
 
-/* Cabecera específica */
+
 .header-back {
   margin-bottom: 8px;
 }
@@ -38,9 +38,7 @@
   height: 16px;
 }
 
-/* ==============================
-   TIMELINE VERTICAL
-   ============================== */
+
 .timeline-container {
   position: relative;
   padding: 20px 0;
@@ -159,7 +157,7 @@
   margin-left: 6px;
 }
 
-/* Links específicos de la tabla historial global */
+
 .miembro-link {
   color: var(--color-blue-medium);
   font-weight: 500;
@@ -185,7 +183,7 @@
   white-space: nowrap;
 }
 
-/* Mobile cards específicos del historial */
+
 .card-miembro {
   font-size: 0.95rem;
   font-weight: 600;

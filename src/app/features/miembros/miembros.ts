@@ -47,13 +47,11 @@ export class MiembrosComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly buscarSubject = new Subject<string>();
 
-  // Estado de la pagina
   readonly datos = signal<PageResponse<MiembroResponse> | null>(null);
   readonly cargando = signal(false);
   readonly centros = signal<CentroRef[]>([]);
   readonly cargos = signal<CargoRef[]>([]);
 
-  // Filtros
   readonly filtros = signal<MiembroFiltros>({ filtroBaja: 'TODOS' });
   readonly pagina = signal(0);
   readonly tamano = signal(10);
@@ -77,7 +75,6 @@ export class MiembrosComponent implements OnInit, OnDestroy {
     'Otra'
   ];
 
-  // UI helpers
   readonly tieneFiltrosActivos = computed(() => {
     const f = this.filtros();
     return !!(
@@ -168,7 +165,6 @@ export class MiembrosComponent implements OnInit, OnDestroy {
       });
   }
 
-  // ---- Filtros ----
   onBuscarChange(valor: string): void {
     this.buscarSubject.next(valor);
   }
@@ -185,7 +181,6 @@ export class MiembrosComponent implements OnInit, OnDestroy {
     this.cargar();
   }
 
-  // ---- Ordenacion ----
   ordenarPor(campo: string): void {
     this.sort.update(s =>
       s.campo === campo
@@ -207,7 +202,6 @@ export class MiembrosComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ---- Paginacion ----
   irAPagina(p: number | '...'): void {
     if (typeof p !== 'number') return;
     this.pagina.set(p);
@@ -220,7 +214,6 @@ export class MiembrosComponent implements OnInit, OnDestroy {
     this.cargar();
   }
 
-  // ---- Acciones ----
   abrirNuevo(): void {
     this.modalMiembro.open();
   }
@@ -290,7 +283,6 @@ export class MiembrosComponent implements OnInit, OnDestroy {
     });
   }
 
-  // ---- Helpers de vista ----
   esBaja(m: MiembroResponse): boolean {
     return !!m.fechaBaja;
   }

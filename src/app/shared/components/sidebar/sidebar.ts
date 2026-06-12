@@ -64,7 +64,6 @@ export class SidebarComponent {
   @HostListener('click', ['$event'])
   protected onSidebarClick(event: MouseEvent): void {
     if (this.layoutService.sidebarCollapsed()) {
-      // Evita que el click se propague al documento (que causaría un colapso inmediato de vuelta)
       event.stopPropagation();
       this.layoutService.expandSidebar();
     }

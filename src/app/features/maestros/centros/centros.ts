@@ -23,7 +23,6 @@ export class CentrosComponent implements OnInit, OnDestroy {
   readonly centros = signal<CentroRef[]>([]);
   readonly cargando = signal(false);
 
-  // Paginación y búsqueda
   readonly buscar = signal<string | undefined>(undefined);
   readonly pagina = signal(0);
   readonly tamano = signal(10);
@@ -50,7 +49,6 @@ export class CentrosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargar();
 
-    // Debounce de búsqueda
     this.buscarSubject.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
@@ -61,7 +59,6 @@ export class CentrosComponent implements OnInit, OnDestroy {
       this.cargar();
     });
 
-    // Recargar cuando se guarda un centro
     this.modalMaestro.guardado$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       if (this.modalMaestro.tipo() === 'centro') {
         this.cargar();

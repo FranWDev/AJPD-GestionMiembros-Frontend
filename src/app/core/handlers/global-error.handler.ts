@@ -7,12 +7,10 @@ export class GlobalErrorHandler implements ErrorHandler {
   private readonly zone = inject(NgZone);
 
   handleError(error: any): void {
-    // Imprimir en consola para depuración
     console.error('Error global capturado:', error);
 
     const message = error instanceof Error ? error.message : String(error);
 
-    // Ejecutar dentro de la zona de Angular si es necesario (para compatibilidad de cambios reactivos)
     this.zone.run(() => {
       this.modalService.showError(
         'Se ha producido un error inusual',

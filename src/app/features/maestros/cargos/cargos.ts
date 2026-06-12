@@ -23,7 +23,6 @@ export class CargosComponent implements OnInit, OnDestroy {
   readonly cargos = signal<CargoRef[]>([]);
   readonly cargando = signal(false);
 
-  // Paginación y búsqueda
   readonly buscar = signal<string | undefined>(undefined);
   readonly pagina = signal(0);
   readonly tamano = signal(10);
@@ -50,7 +49,6 @@ export class CargosComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cargar();
 
-    // Debounce de búsqueda
     this.buscarSubject.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
@@ -61,7 +59,6 @@ export class CargosComponent implements OnInit, OnDestroy {
       this.cargar();
     });
 
-    // Recargar cuando se guarda un cargo
     this.modalMaestro.guardado$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       if (this.modalMaestro.tipo() === 'cargo') {
         this.cargar();

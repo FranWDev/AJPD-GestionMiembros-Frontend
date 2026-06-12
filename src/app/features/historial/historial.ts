@@ -34,7 +34,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
   private readonly buscarSubject = new Subject<string>();
 
-  // ID de miembro (si filtramos por uno específico)
   readonly miembroId = signal<number | null>(null);
   readonly miembro = signal<MiembroResponse | null>(null);
 
@@ -42,23 +41,19 @@ export class HistorialComponent implements OnInit, OnDestroy {
     const m = this.miembro();
     if (!m || !m.historialCargos) return [];
     const h = [...m.historialCargos];
-    // Ordenar por fecha de inicio descendente por defecto (más recientes al principio)
     h.sort((a, b) => b.fechaInicio.localeCompare(a.fechaInicio));
     return h;
   });
 
-  // Estado global del historial
   readonly datosGlobal = signal<PageResponse<CargoHistorialDto> | null>(null);
   readonly cargos = signal<CargoRef[]>([]);
   readonly cargando = signal(false);
 
-  // Filtros de vista global
   readonly filtros = signal<CargoHistorialFiltros>({});
   readonly pagina = signal(0);
   readonly tamano = signal(10);
   readonly mostrarFiltrosAvanzados = signal(false);
 
-  // UI Helpers
   readonly tieneFiltrosActivos = computed(() => {
     const f = this.filtros();
     return !!(
@@ -88,7 +83,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    // Escuchar parámetros de query (?miembroId=X)
     this.route.queryParams.pipe(takeUntil(this.destroy$)).subscribe((params) => {
       const id = params['miembroId'];
       if (id) {
@@ -102,7 +96,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
       }
     });
 
-    // Debounce búsqueda libre (vista global)
     this.buscarSubject.pipe(
       debounceTime(1000),
       distinctUntilChanged(),
@@ -113,7 +106,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
       this.cargarHistorialGlobal();
     });
 
-    // Refrescar al guardar cambios en el modal
     this.modalHistorial.guardado$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const mid = this.miembroId();
       if (mid) {
@@ -160,7 +152,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
     });
   }
 
-  // ---- Filtros (Vista Global) ----
   onBuscarChange(valor: string): void {
     this.buscarSubject.next(valor);
   }
@@ -182,7 +173,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
 
 
 
-  // ---- Paginación (Vista Global) ----
   irAPagina(p: number | '...'): void {
     if (typeof p !== 'number') return;
     this.pagina.set(p);
@@ -195,7 +185,6 @@ export class HistorialComponent implements OnInit, OnDestroy {
     this.cargarHistorialGlobal();
   }
 
-  // ---- Acciones ----
   editar(item: any, isGlobal: boolean): void {
     const miembroId = isGlobal ? item.miembroId : this.miembroId();
     const miembroNombre = isGlobal ? item.miembroNombre : this.miembro()?.nombreRazonSocial;

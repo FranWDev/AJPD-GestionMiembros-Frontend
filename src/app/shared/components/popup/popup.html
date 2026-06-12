@@ -1,6 +1,6 @@
 @if (modalService.isOpen()) {
-  <div class="modal-backdrop" (click)="close()">
-    <div class="modal-card" [class]="modalService.type()" (click)="$event.stopPropagation()">
+  <div class="modal-backdrop" [class.modal-backdrop--closing]="modalService.isClosing()" (click)="close()">
+    <div class="modal-card" [class]="modalService.type()" [class.modal-card--closing]="modalService.isClosing()" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <div class="icon-container">
           @switch (modalService.type()) {

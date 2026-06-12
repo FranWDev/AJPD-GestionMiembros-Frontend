@@ -1,10 +1,9 @@
 @if (svc.isOpen()) {
-  <div class="modal-backdrop" (click)="svc.cerrar()" aria-hidden="true"></div>
+  <div class="modal-backdrop" [class.modal-backdrop--closing]="svc.isClosing()" (click)="svc.cerrar()" aria-hidden="true"></div>
 
   <div class="modal-container" role="dialog" aria-modal="true">
-    <div class="modal-box" [class]="'modal-box--' + (svc.config()?.tipo ?? 'warning')">
+    <div class="modal-box" [class]="'modal-box--' + (svc.config()?.tipo ?? 'warning')" [class.modal-box--closing]="svc.isClosing()">
 
-      <!-- Icono -->
       <div class="modal-icon">
         @if (svc.config()?.tipo === 'danger') {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -24,13 +23,11 @@
         }
       </div>
 
-      <!-- Contenido -->
       <div class="modal-content">
         <h2 class="modal-title">{{ svc.config()?.titulo }}</h2>
         <p class="modal-mensaje">{{ svc.config()?.mensaje }}</p>
       </div>
 
-      <!-- Acciones -->
       <div class="modal-actions">
         <button
           class="btn btn-ghost"

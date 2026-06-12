@@ -19,7 +19,6 @@ export class ShellComponent {
   protected onDocumentClick(event: MouseEvent): void {
     if (window.innerWidth >= 768 && !this.layoutService.sidebarCollapsed()) {
       const sidebarEl = this.elementRef.nativeElement.querySelector('.shell-sidebar');
-      // Si el click no ha sido dentro del sidebar, la colapsamos
       if (sidebarEl && !sidebarEl.contains(event.target as Node)) {
         this.layoutService.collapseSidebar();
       }

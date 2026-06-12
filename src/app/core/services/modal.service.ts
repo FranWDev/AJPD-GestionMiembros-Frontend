@@ -6,7 +6,11 @@ export type ModalType = 'success' | 'error' | 'warning' | 'info';
   providedIn: 'root'
 })
 export class ModalService {
-  readonly isOpen = signal(false);
+  private readonly _isOpen = signal(false);
+  private readonly _isClosing = signal(false);
+
+  readonly isOpen = this._isOpen.asReadonly();
+  readonly isClosing = this._isClosing.asReadonly();
   readonly type = signal<ModalType>('info');
   readonly title = signal('');
   readonly message = signal('');
@@ -15,7 +19,7 @@ export class ModalService {
     this.type.set(type);
     this.title.set(title);
     this.message.set(message);
-    this.isOpen.set(true);
+    this._isOpen.set(true);
   }
 
   showError(title: string, message: string): void {
@@ -31,6 +35,10 @@ export class ModalService {
   }
 
   close(): void {
-    this.isOpen.set(false);
+    this._isClosing.set(true);
+    setTimeout(() => {
+      this._isOpen.set(false);
+      this._isClosing.set(false);
+    }, 200);
   }
 }

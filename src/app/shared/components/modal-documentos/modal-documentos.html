@@ -1,8 +1,8 @@
 @if (svc.isOpen()) {
-  <div class="modal-backdrop" (click)="svc.cerrar()" aria-hidden="true"></div>
+  <div class="modal-backdrop" [class.modal-backdrop--closing]="svc.isClosing()" (click)="svc.cerrar()" aria-hidden="true"></div>
 
   <div class="modal-container" role="dialog" aria-modal="true">
-    <div class="modal-box">
+    <div class="modal-box" [class.modal-box--closing]="svc.isClosing()">
       <div class="modal-header">
         <h2 class="modal-title">Documentos — {{ svc.nombre() }}</h2>
       </div>

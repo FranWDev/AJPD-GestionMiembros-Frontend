@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
   errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
-    // Escuchar parámetros de la URL para detectar el token o errores de redirección
     this.route.queryParams.subscribe(params => {
       const token = params['token'];
       const error = params['error'];

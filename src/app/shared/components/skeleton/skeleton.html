@@ -1,11 +1,5 @@
-<!-- =============================================
-     VARIANTE: TABLE (miembros, historial global)
-     Desktop → tabla con filas skeleton
-     Mobile  → cards skeleton
-============================================= -->
 @if (variant === 'table') {
 
-  <!-- Desktop: tabla skeleton -->
   <div class="skeleton-table-wrapper">
     <table class="skeleton-table">
       <thead>
@@ -31,7 +25,6 @@
     </table>
   </div>
 
-  <!-- Mobile: cards skeleton -->
   <div class="skeleton-cards">
     @for (r of rowsArray; track r) {
       <div class="skeleton-card">
@@ -53,14 +46,8 @@
 }
 
 
-<!-- =============================================
-     VARIANTE: MAESTRO (cargos, centros)
-     Desktop → tabla 3 cols
-     Mobile  → cards simples
-============================================= -->
 @if (variant === 'maestro') {
 
-  <!-- Desktop: tabla skeleton -->
   <div class="skeleton-table-wrapper">
     <table class="skeleton-table">
       <thead>
@@ -87,7 +74,6 @@
     </table>
   </div>
 
-  <!-- Mobile: cards maestro skeleton -->
   <div class="skeleton-cards">
     @for (r of rowsArray; track r) {
       <div class="skeleton-card">
@@ -104,9 +90,6 @@
   </div>
 }
 
-<!-- =============================================
-     VARIANTE: TIMELINE (historial de miembro)
-============================================= -->
 @if (variant === 'timeline') {
   <div class="skeleton-timeline">
     @for (r of rowsArray; track r) {

@@ -47,7 +47,7 @@
   height: 24px;
 }
 
-/* Colores temáticos por tipo de modal */
+
 .modal-card.success .icon-container {
   background-color: #e6f4ea;
   color: var(--color-success);
@@ -107,6 +107,11 @@
   to { opacity: 1; }
 }
 
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
 @keyframes scaleIn {
   from {
     opacity: 0;
@@ -116,4 +121,23 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.modal-backdrop--closing {
+  animation: fadeOut var(--transition-fast) forwards !important;
+}
+
+.modal-card--closing {
+  animation: scaleOut var(--transition-normal) forwards !important;
 }

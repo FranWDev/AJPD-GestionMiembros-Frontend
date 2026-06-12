@@ -20,9 +20,7 @@ export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
           'La sesión ha expirado. Por favor, introduce la clave de acceso de nuevo.'
         );
       } else if (error.status === 401 && isLoginRequest) {
-        // Permitir que LoginComponent gestione su propia validación de credenciales
       } else {
-        // Errores HTTP genéricos (500, 400, 404, de red, etc.)
         let mensaje = 'No se ha podido conectar con el servidor. Inténtalo de nuevo más tarde.';
         if (error.error && typeof error.error === 'object' && error.error.message) {
           mensaje = error.error.message;

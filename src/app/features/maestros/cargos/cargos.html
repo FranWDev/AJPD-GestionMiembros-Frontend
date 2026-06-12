@@ -1,6 +1,6 @@
 <div class="maestros-page">
 
-  <!-- Cabecera -->
+  
   <div class="page-header">
     <div>
       <h1 class="page-title">Cargos</h1>
@@ -14,7 +14,7 @@
     </button>
   </div>
 
-  <!-- Contenedor de Filtros/Búsqueda -->
+  
   <div class="filters-card" style="margin-bottom: 20px;">
     <div class="filters-header">
       <div class="filter-search">
@@ -32,7 +32,7 @@
       </div>
 
       <div class="filters-header-actions">
-        <!-- Ordenar por (Solo visible en móvil) -->
+        
         <div class="filter-field filter-field--ordenar">
           <label for="cargos-ordenar" class="filter-label">Ordenar por</label>
           <select id="cargos-ordenar" class="filter-input filter-select"
@@ -72,7 +72,7 @@
         }
       </div>
     } @else {
-      <!-- Tabla de cargos -->
+      
       <div class="table-wrapper">
         <table class="maestros-table">
           <thead>
@@ -119,7 +119,7 @@
         </table>
       </div>
 
-      <!-- Vista móvil (cards) -->
+      
       <div class="cards-list">
         @for (c of cargos(); track c.id) {
           <div class="maestro-card">
@@ -135,7 +135,7 @@
         }
       </div>
 
-      <!-- Paginación -->
+      
       <div class="pagination" style="margin-top: 16px;">
         <div class="pagination-info">
           Mostrando {{ cargos().length }} de {{ totalElementos() }} cargos

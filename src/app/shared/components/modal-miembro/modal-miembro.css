@@ -1,4 +1,4 @@
-/* Overrides de tamaño para el modal de miembros */
+
 .modal-box {
   max-width: 680px;
   max-height: calc(100vh - 48px);

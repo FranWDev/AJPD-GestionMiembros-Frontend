@@ -21,11 +21,9 @@ export class AuthService {
   private readonly cookieService = inject(CookieService);
   private readonly tokenKey = 'ajpd_jwt_token';
 
-  // Reactividad con Signals para soporte de Zoneless
   readonly token = signal<string | null>(null);
 
   constructor() {
-    // Restaurar el token desde las cookies al inicializar
     const savedToken = this.cookieService.get(this.tokenKey);
     if (savedToken) {
       this.token.set(savedToken);
@@ -43,7 +41,7 @@ export class AuthService {
   }
 
   saveToken(token: string): void {
-    this.cookieService.set(this.tokenKey, token, 1); // Expira en 1 día
+    this.cookieService.set(this.tokenKey, token, 1);
     this.token.set(token);
   }
 

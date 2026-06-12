@@ -7,11 +7,13 @@ export class ModalMaestroService {
   private readonly _id = signal<number | null>(null);
   private readonly _nombre = signal<string>('');
   private readonly _open = signal(false);
+  private readonly _isClosing = signal(false);
 
   readonly tipo = this._tipo.asReadonly();
   readonly id = this._id.asReadonly();
   readonly nombre = this._nombre.asReadonly();
   readonly isOpen = this._open.asReadonly();
+  readonly isClosing = this._isClosing.asReadonly();
   readonly esEdicion = computed(() => this._id() !== null);
   readonly guardado$ = new Subject<void>();
 
@@ -23,8 +25,12 @@ export class ModalMaestroService {
   }
 
   cerrar(): void {
-    this._open.set(false);
-    this._id.set(null);
-    this._nombre.set('');
+    this._isClosing.set(true);
+    setTimeout(() => {
+      this._open.set(false);
+      this._id.set(null);
+      this._nombre.set('');
+      this._isClosing.set(false);
+    }, 200);
   }
 }

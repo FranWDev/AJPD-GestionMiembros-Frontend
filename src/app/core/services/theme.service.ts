@@ -13,6 +13,5 @@ export class ThemeService {
   }
 
   toggle(): void {
-    // No-op: theme is forced to light
   }
 }
